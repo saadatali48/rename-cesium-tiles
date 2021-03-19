@@ -1,6 +1,6 @@
 import json
 import os
-folder = r".\zameen_aurum"
+folder = r".\saadat"
 
 # Give any key, it will give you value for that. No matter how much it is nested.
 def json_extract(obj, key):
@@ -42,10 +42,16 @@ def RemovePlusFromJson(jsonfile):
             print(jsonfile)
     
     
-
-
+#Rename all directories
 for root, dirs, filenames in os.walk(folder):
+    for dir in dirs:
+        if "+" in dir:
+            newdir = dir.replace("+","")
+            os.rename(os.path.join(root, dir), os.path.join(root, newdir))
 
+
+#Rename all files and paths within json
+for root, dirs, filenames in os.walk(folder):
     for filename in filenames:
         if "+" in filename:
             newfilename = filename.replace("+","")
